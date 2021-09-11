@@ -28,7 +28,7 @@ install_use_push <- function(ref = "main") {
   system2(
     "sed", c(
       "-i", "''", "-e",
-      '"s/remotes::install_github(\\\"lorenzwalthert\\/touchstone.*\\\").*/remotes::install_github(\\\"lorenzwalthert\\/touchstone$R_TOUCHSTONE_TEST_REF\\\")/g"',
+      '"s/\\\"lorenzwalthert\\/touchstone.*\\\".*/\\\"lorenzwalthert\\/touchstone$R_TOUCHSTONE_TEST_REF\\\")/g"',
       ".github/workflows/touchstone-receive.yaml"
     ),
     env = paste0("R_TOUCHSTONE_TEST_REF=", ref, ";")
