@@ -19,7 +19,7 @@ install_use_push <- function(ref = "main") {
   if (nrow(gert::git_status()) > 0) {
     rlang::abort("must have clean git dir to start process")
   }
-  remotes::install_github(paste0("lorenzwalthert/touchstone@", ref), upgrade = "never")
+  remotes::install_github(paste0("lorenzwalthert/touchstone", ref), upgrade = "never")
   fs::file_delete(
     fs::dir_ls(".github/workflows/", regexp = "(touchstone|cancel).*\\.yaml")
   )
@@ -27,8 +27,8 @@ install_use_push <- function(ref = "main") {
   callr::r(function() touchstone::use_touchstone())
   system2(
     "sed", c(
-      "-i", "''", "-e",
-      '"s/remotes::install_github(\\\"lorenzwalthert\\/touchstone.*\\\").*/remotes::install_github(\\\"lorenzwalthert\\/touchstone@$R_TOUCHSTONE_TEST_REF\\\")/g"',
+      "-i", "-e",
+      '"s/lorenzwalthert\\/touchstone.*/lorenzwalthert\\/touchstone$R_TOUCHSTONE_TEST_REF/g"',
       ".github/workflows/touchstone-receive.yaml"
     ),
     env = paste0("R_TOUCHSTONE_TEST_REF=", ref, ";")

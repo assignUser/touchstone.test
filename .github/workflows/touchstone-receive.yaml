@@ -52,7 +52,7 @@ jobs:
         with:
           cache-version: 1
           extra-packages: |
-            lorenzwalthert/touchstone
+            lorenzwalthert/touchstone#57
             ggplot2
             dplyr
             gert
